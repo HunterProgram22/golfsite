@@ -1,0 +1,26 @@
+{% extends 'rounds/base.html' %}
+
+{% block content %}
+
+<h1>Rounds Played</h1>
+<h2> List of Rounds</h2>
+<table>
+<tr>
+    <th>Round</th>
+    <th>Strokes</th>
+    <th>Putts</th>
+    <th>Fairways Hit</th>
+    <th>GIR</th>
+</tr>
+{% for round in round_stats %}
+<tr>
+   <td>{{ round }}</td>
+   <td>{{round.strokes}}</td>
+   <td>{{round.putts}}</td>
+   <td>{{round.fairways_hit}}</td>
+   <td>{{round.gir}}</td>     
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'rounds/base.html' %}
+
+
+{% block content %}
+
+<h1>Handicap Differential</h1>
+<table style="border: 3px solid black;">
+<tr style="border: 1px solid black;">
+    <th>Round</th>
+    <th> </th>
+    <th>Handicap Differential</th>
+</tr>
+
+{% for handicap in round_handicap %}
+<tr>
+    <td>{{ handicap.0 }}</td>
+    <td>&nbsp; &nbsp; &nbsp;</td>
+    <td>{{ handicap.1 }}</td>
+   
+{% endfor %}
+
+</tr>
+
+</table>
+
+{% endblock %}
