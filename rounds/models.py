@@ -11,7 +11,9 @@ class Course(models.Model):
     
 class Round(models.Model):
     course = models.ForeignKey(Course, to_field="course")
-    date = models.DateField()
+    #setting date to unique, not sure if will raise issue with multiple rounds
+    #on the same date, maybe only if two rounds on same course and same date
+    date = models.DateField(unique=True)
     strokes = models.IntegerField()
     putts = models.IntegerField()
     fairways_hit = models.IntegerField()
@@ -32,5 +34,20 @@ class Round(models.Model):
     def handicap_diff(self):
         self.differential = ((self.strokes - self.course_rating())*113)/self.course_slope()
         return self.differential
+    
+class Shots(models.Model):
+    date = models.OneToOneField(Round, to_field="date")
+    drdist = models.IntegerField()
+    dracc = models.IntegerField()
+    par3tee = models.IntegerField()
+    lngdist = models.IntegerField()
+    lngacc = models.IntegerField()
+    shtdist = models.IntegerField()
+    shtacc = models.IntegerField()
+    pitch = models.IntegerField()
+    chip = models.IntegerField()
+    putt = models.IntegerField()
+    penal = models.IntegerField()
+    coursemgmt = models.IntegerField()
     
     

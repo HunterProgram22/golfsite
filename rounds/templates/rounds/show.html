@@ -3,10 +3,11 @@
 {% block content %}
 
 <h1>Rounds Played</h1>
-<h2> List of Rounds</h2>
 <table>
 <tr>
-    <th>Round</th>
+    <th>Date</th>
+    <th>Course</th>
+    <th>&nbsp;&nbsp;&nbsp;</th>
     <th>Strokes</th>
     <th>Putts</th>
     <th>Fairways Hit</th>
@@ -14,11 +15,16 @@
 </tr>
 {% for round in round_stats %}
 <tr>
-   <td>{{ round }}</td>
-   <td>{{round.strokes}}</td>
-   <td>{{round.putts}}</td>
-   <td>{{round.fairways_hit}}</td>
-   <td>{{round.gir}}</td>     
+    <form method="POST" action='/delete_round/{{ round.id }}' >{% csrf_token %}
+        <td>{{ round.date }}</td>
+        <td> {{ round.course }}</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>{{round.strokes}}</td>
+        <td>{{round.putts}}</td>
+        <td>{{round.fairways_hit}}</td>
+        <td>{{round.gir}}</td> 
+        <td><button type="submit">Delete Round</button><td>
+    </form>    
 </tr>
 {% endfor %}
 </table>

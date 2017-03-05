@@ -15,14 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from rounds.views import home, history, round_new, show, handicap
+from rounds.views import home, manage, round_new, \
+                        course_new, show, handicap, delete_round, shots_new, \
+                        sop
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^history/$', history, name='history'),
+    url(r'^manage/$', manage, name='manage'),
     url(r'^round/new/$', round_new, name='round_new'),
+    url(r'^course/new/$', course_new, name='course_new'),
+    url(r'^shots/new/$', shots_new, name='shots_new'),
     url(r'^show/$', show, name='show'),
+    url(r'^delete_round/', delete_round, name='delete_round'),
     url(r'^handicap/$', handicap, name='handicap'),
+    url(r'^sop/$', sop, name='sop'),
     url(r'^', home, name='home'),
 ]

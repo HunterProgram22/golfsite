@@ -5,8 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
   <style>
 
   body {
@@ -37,17 +39,15 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">Home</a></li>
-      <li><a href="/history/">Manage</a></li>
-      <li><a href="/show/">History</a></li>
+      <li><a href="/manage/">Manage</a></li>
+      <li><a href="/show/">Rounds</a></li>
       <li><a href="/handicap/">Handicap</a></li>
+      <li><a href="/sop/">SOP Data</a></li>
     </ul>
   </div>
 </nav>
 <div class="content container">
-        <div class="page-header">
-            <a href="{% url 'round_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            <h1><a href="/">The Golf Handicapper</a></h1>
-        </div>
+
         <div class="row">
             <div class="col-md-8">
             {% block content %}

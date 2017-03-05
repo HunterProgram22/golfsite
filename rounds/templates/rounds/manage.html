@@ -1,0 +1,20 @@
+{% extends 'rounds/base.html' %}
+
+{% block content %}
+
+<h1>Manage Stats</h1>
+    <div class="menu-select">
+        <a href="{% url 'round_new' %}" class="top-menu">        
+        <span><b> Add Round</b></span></a>
+    </div>
+    <div class="menu-select">
+        <a href="{% url 'course_new' %}" class="top-menu">        
+        <span><b> Add Course</b></span></a>
+    </div>
+    <div class="menu-select">
+        <a href="{% url 'shots_new' %}" class="top-menu">        
+        <span><b> Add Shots Over Par</b></span></a>
+    </div>
+
+
+{% endblock %}
