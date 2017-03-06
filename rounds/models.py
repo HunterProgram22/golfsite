@@ -2,7 +2,7 @@ from django.db import models
 
 class Course(models.Model):
     course = models.CharField(max_length=200, unique=True)
-    rating = models.IntegerField()
+    rating = models.DecimalField(max_digits=5, decimal_places=2)
     slope = models.IntegerField()
     par = models.IntegerField()
     
@@ -18,21 +18,25 @@ class Round(models.Model):
     putts = models.IntegerField()
     fairways_hit = models.IntegerField()
     gir = models.IntegerField()
+    equistrokes = models.IntegerField()
     
     def __str__(self):
-        return str(self.course) + " " + str(self.date)
+        return str(self.date) + " " + str(self.course) 
     
     def print_round(self):
         return [(course, strokes)]
     
     def course_rating(self):
+        self.course.rating = float(self.course.rating)
         return self.course.rating
     
     def course_slope(self):
+        self.course.slope = float(self.course.slope)
         return self.course.slope
     
     def handicap_diff(self):
-        self.differential = ((self.strokes - self.course_rating())*113)/self.course_slope()
+        self.differential = ((self.equistrokes - self.course_rating())*113)/self.course_slope()
+        self.differential = round(self.differential, 1)
         return self.differential
     
 class Shots(models.Model):

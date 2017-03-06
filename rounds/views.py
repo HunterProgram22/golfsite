@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from .forms import RoundForm, CourseForm, ShotsForm
 from .models import Round, Shots
+from .functions import calcHandicap
 
 
 def home(request):
@@ -17,7 +18,7 @@ def round_new(request):
             round = form.save()
             # Add user save at later point here
             round.save()
-            return redirect('/')
+            return redirect('/manage/')
     else:
         form = RoundForm()
         return render(request, 'rounds/round_edit.html', {'form': form} )
@@ -58,17 +59,24 @@ def shots_new(request):
 
 
 def show(request):
-        round_stats = Round.objects.all()
+        round_stats = Round.objects.all().order_by('-date')
         return render(request, 'rounds/show.html', {'round_stats': round_stats})
 
 def handicap(request):
-    round_stats = Round.objects.all()
+    round_stats = Round.objects.all().order_by('date')
     round_handicap = []
+    diffList = []
+    handicapTotal = 0 
+    round_count = 0
     for round in round_stats:
-        round_handicap.append((round, round.handicap_diff()))
+        round_count += 1
+        diffList.append(round.handicap_diff())
+        handicapTotal = calcHandicap((round_count), diffList)
+        round_handicap.append((round, round.handicap_diff(), handicapTotal))
     return render(request, 'rounds/handicap.html', 
                   {'round_handicap': round_handicap})
-    
+
+
 def sop(request):
     sop_stats = Shots.objects.all()
     return render(request, 'rounds/sop.html', {'sop_stats': sop_stats})

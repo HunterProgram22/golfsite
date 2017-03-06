@@ -7,7 +7,7 @@ class RoundForm(forms.ModelForm):
     class Meta:
         model = Round
         fields = ('course', 'date', 'strokes', 'putts', 
-                  'fairways_hit', 'gir')
+                  'fairways_hit', 'gir', 'equistrokes')
         
 
 class CourseForm(forms.ModelForm):
