@@ -53,5 +53,5 @@ class Shots(models.Model):
     putt = models.IntegerField()
     penal = models.IntegerField()
     coursemgmt = models.IntegerField()
-    
+
     

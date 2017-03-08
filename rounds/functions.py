@@ -31,4 +31,34 @@ def calcHandicap(rounds, diffList):
     handicap = (.96*(total/diffUsed))
     handicap = round(handicap, 2)
     return handicap
-        
+    
+def yearAverages(rounds):
+    roundsplayed = len(rounds)
+    avgScore = 0
+    avgPutts = 0
+    avgFH = 0
+    avgGIR = 0
+    for x in range(0, roundsplayed):
+        year = rounds[x].date.year
+        avgScore += rounds[x].strokes
+        avgPutts += rounds[x].putts
+        avgFH += rounds[x].fairways_hit
+        avgGIR += rounds[x].gir
+    avgScore = avgScore/roundsplayed
+    avgPutts = avgPutts/roundsplayed 
+    avgFH = avgFH/roundsplayed
+    avgGIR = avgGIR/roundsplayed
+    return (year, roundsplayed, avgScore, avgPutts, avgFH, avgGIR)
+
+
+
+
+
+
+
+
+
+
+
+
+
