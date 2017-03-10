@@ -2,15 +2,28 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from .forms import RoundForm, CourseForm, ShotsForm
 from .models import Round, Shots
-from .functions import calcHandicap, yearAverages
+from .functions import calcHandicap, yearAverages, strokesGraph
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 
 def home(request):
     year_stats = []
-    # TODO Filter all round objects and get years and set range at low and high+1
-    for year in range(2016, 2018):
+    years_played = []
+    rounds = Round.objects.all()
+    plt.plot(strokesGraph(rounds))
+    plt.title('Score History')
+    plt.ylabel('Strokes')
+    plt.savefig('rounds/static/rounds/graph.png')
+    plt.close()
+    for round in rounds:
+        if round.get_year() not in years_played:
+            years_played.append(round.get_year())
+    for year in years_played:
         year_rounds = Round.objects.filter(date__year=year)
         year_stats.append(yearAverages(year_rounds))
     return render(request, 'rounds/home.html', {'year_stats': year_stats})
+
 
 def manage(request):
     return render(request, 'rounds/manage.html',{})

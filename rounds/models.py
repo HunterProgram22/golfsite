@@ -24,7 +24,10 @@ class Round(models.Model):
         return str(self.date) + " " + str(self.course) 
     
     def print_round(self):
-        return [(course, strokes)]
+        return [(self.course, self.strokes)]
+    
+    def get_year(self):
+        return self.date.year
     
     def course_rating(self):
         self.course.rating = float(self.course.rating)
